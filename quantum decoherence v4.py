@@ -130,8 +130,8 @@ def run_quantum_sim(dt, num_steps, N, ham, q_global):
 up = np.array([1,0]).reshape(2,1)
 down = np.array([0,1]).reshape(2,1)
     
-c1 = np.sqrt(.5)
-c2 = np.sqrt(.5)
+c1 = np.sqrt(.9)
+c2 = np.sqrt(.1)
 qubit = np.array([c1, c2]) # c1|0> + c2|1>
 qubit = qubit.reshape(2,1) # reshape as a 2x1 column vector
 
@@ -321,7 +321,7 @@ plt.title(r'Reduced Density Matrix $\rho_{00}$ Diagonal Term ($N_{sims}$='+str(n
 plt.legend()
 
 # histogram of rho_11
-plt.subplot(2,2,2)
+plt.subplot(2,2,4)
 plt.hist(all_rho_red_od_lr, label=r'$\mu$='+str(np.round(np.mean(all_rho_red_od_lr),2))+\
          r', $\sigma$='+str(np.round(np.std(all_rho_red_od_lr),2)))
 plt.xlim([0,1])
@@ -332,7 +332,7 @@ plt.title(r'Reduced Density Matrix $\rho_{11}$ Diagonal Term ($N_{sims}$='+str(n
 plt.legend()
 
 # histogram of rho_01
-plt.subplot(2,2,3)
+plt.subplot(2,2,2)
 plt.hist(all_rho_red_od_ur, label=r'$\mu$='+str(np.round(np.mean(all_rho_red_od_ur),2))+\
          r', $\sigma$='+str(np.round(np.std(all_rho_red_od_ur),2)))
 plt.xlim([0,1])
@@ -343,7 +343,7 @@ plt.title(r'Reduced Density Matrix $\rho_{01}$ Off-Diagonal Term ($N_{sims}$='+s
 plt.legend()
 
 # histogram of rho_10
-plt.subplot(2,2,4)
+plt.subplot(2,2,3)
 plt.hist(all_rho_red_od_ll, label=r'$\mu$='+str(np.round(np.mean(all_rho_red_od_ll),2))+\
          r', $\sigma$='+str(np.round(np.std(all_rho_red_od_ll),2)))#,\
 #         bins=np.arange(0, 1 + binwidth, binwidth))
