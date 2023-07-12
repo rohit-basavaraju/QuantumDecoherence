@@ -130,8 +130,8 @@ def run_quantum_sim(dt, num_steps, N, ham, q_global):
 up = np.array([1,0]).reshape(2,1)
 down = np.array([0,1]).reshape(2,1)
     
-c1 = np.sqrt(.9)
-c2 = np.sqrt(.1)
+c1 = np.sqrt(.25)
+c2 = np.sqrt(.75)
 qubit = np.array([c1, c2]) # c1|0> + c2|1>
 qubit = qubit.reshape(2,1) # reshape as a 2x1 column vector
 
@@ -142,12 +142,13 @@ qubit = qubit.reshape(2,1) # reshape as a 2x1 column vector
 # define the environment (let's try N>1 now)
 N = 5 # number of environmental qubits
 
-q_env = up # get the ball rolling 
+q_env = down # get the ball rolling 
 for n in range(N-1):
     #if np.round(np.random.rand()) == 0:
-    q_env = np.kron(up, q_env)
-    #else:
-    #    q_env = np.kron(up, q_env)
+    if n%2 == 1:
+        q_env = np.kron(down, q_env)
+    else:
+        q_env = np.kron(up, q_env)
 
 
 # In[5]:
