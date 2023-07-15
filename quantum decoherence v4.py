@@ -140,15 +140,17 @@ qubit = qubit.reshape(2,1) # reshape as a 2x1 column vector
 
 
 # define the environment (let's try N>1 now)
-N = 5 # number of environmental qubits
+N = 7 # number of environmental qubits
 
 q_env = down # get the ball rolling 
 for n in range(N-1):
-    #if np.round(np.random.rand()) == 0:
-    if n%2 == 1:
+    n_round = np.round(np.random.rand())
+    if n_round%2 == 1:
         q_env = np.kron(down, q_env)
+        print('env qubit down')
     else:
         q_env = np.kron(up, q_env)
+        print('env qubit up')
 
 
 # In[5]:
@@ -301,9 +303,9 @@ binwidth = .01
 
 # histogram of eigenvalues
 plt.subplot(2,2,4)
-plt.hist(all_eigs, label=r'$\mu$='+str(np.mean(np.real(all_eigs)))+r', $\sigma$='+str(np.std(all_eigs)))
+plt.hist(all_eigs, density = True, label=r'$\mu$='+str(np.mean(np.real(all_eigs)))+r', $\sigma$='+str(np.std(all_eigs)))
 plt.xlim([0,1])
-plt.ylim([0, num_sims])
+#plt.ylim([0, num_sims])
 plt.grid()
 plt.title('Reduced Density Matrix Eigenvalues ($N_{sims}$='+str(num_sims)+', $n_e$='+str(N)+\
           r', $\alpha$='+str(coupling)+', dt='+str(dt)+')')
@@ -312,10 +314,10 @@ plt.legend()
 # histogram of rho_00
 plt.figure(2)
 plt.subplot(2,2,1)
-plt.hist(all_rho_red_od_ul, label=r'$\mu$='+str(np.round(np.mean(all_rho_red_od_ul),2))+\
+plt.hist(all_rho_red_od_ul, density = True, label=r'$\mu$='+str(np.round(np.mean(all_rho_red_od_ul),2))+\
          r', $\sigma$='+str(np.round(np.std(all_rho_red_od_ul),2)))
 plt.xlim([0,1])
-plt.ylim([0, num_sims])
+#plt.ylim([0, num_sims])
 plt.grid()
 plt.title(r'Reduced Density Matrix $\rho_{00}$ Diagonal Term ($N_{sims}$='+str(num_sims)+', $n_e$='+str(N)+\
           r', $\alpha$='+str(coupling)+', dt='+str(dt)+')')
@@ -323,10 +325,10 @@ plt.legend()
 
 # histogram of rho_11
 plt.subplot(2,2,4)
-plt.hist(all_rho_red_od_lr, label=r'$\mu$='+str(np.round(np.mean(all_rho_red_od_lr),2))+\
+plt.hist(all_rho_red_od_lr, density = True, label=r'$\mu$='+str(np.round(np.mean(all_rho_red_od_lr),2))+\
          r', $\sigma$='+str(np.round(np.std(all_rho_red_od_lr),2)))
 plt.xlim([0,1])
-plt.ylim([0, num_sims])
+#plt.ylim([0, num_sims])
 plt.grid()
 plt.title(r'Reduced Density Matrix $\rho_{11}$ Diagonal Term ($N_{sims}$='+str(num_sims)+', $n_e$='+str(N)+\
           r', $\alpha$='+str(coupling)+', dt='+str(dt)+')')
@@ -334,10 +336,10 @@ plt.legend()
 
 # histogram of rho_01
 plt.subplot(2,2,2)
-plt.hist(all_rho_red_od_ur, label=r'$\mu$='+str(np.round(np.mean(all_rho_red_od_ur),2))+\
+plt.hist(all_rho_red_od_ur, density = True, label=r'$\mu$='+str(np.round(np.mean(all_rho_red_od_ur),2))+\
          r', $\sigma$='+str(np.round(np.std(all_rho_red_od_ur),2)))
 plt.xlim([0,1])
-plt.ylim([0, num_sims])
+#plt.ylim([0, num_sims])
 plt.grid()
 plt.title(r'Reduced Density Matrix $\rho_{01}$ Off-Diagonal Term ($N_{sims}$='+str(num_sims)+', $n_e$='+str(N)+\
           r', $\alpha$='+str(coupling)+', dt='+str(dt)+')')
@@ -345,11 +347,11 @@ plt.legend()
 
 # histogram of rho_10
 plt.subplot(2,2,3)
-plt.hist(all_rho_red_od_ll, label=r'$\mu$='+str(np.round(np.mean(all_rho_red_od_ll),2))+\
+plt.hist(all_rho_red_od_ll, density = True, label=r'$\mu$='+str(np.round(np.mean(all_rho_red_od_ll),2))+\
          r', $\sigma$='+str(np.round(np.std(all_rho_red_od_ll),2)))#,\
 #         bins=np.arange(0, 1 + binwidth, binwidth))
 plt.xlim([0,1])
-plt.ylim([0, num_sims])
+#plt.ylim([0, num_sims])
 plt.grid()
 plt.title(r'Reduced Density Matrix $\rho_{10}$ Off-Diagonal Term ($N_{sims}$='+str(num_sims)+', $n_e$='+str(N)+\
           r', $\alpha$='+str(coupling)+', dt='+str(dt)+')')
